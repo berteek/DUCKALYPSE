@@ -118,7 +118,7 @@ func _on_Button_pressed():
 					error = true
 					
 			"shoot":
-				if (words[1] != "it"):
+				if (words[1] != "it" and words.size() < 2):
 					error()
 					i = textArray.size()
 					error = true

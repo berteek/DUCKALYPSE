@@ -442,6 +442,7 @@ color = Color( 0.321569, 0.321569, 0.321569, 1 )
 position = Vector2( 281, 43 )
 scale = Vector2( 0.725, 0.725 )
 frames = SubResource( 4 )
+frame = 1
 playing = true
 
 [node name="WinScreen" type="ColorRect" parent="."]
