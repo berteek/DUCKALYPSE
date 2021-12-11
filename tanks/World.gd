@@ -59,8 +59,13 @@ func _on_Button_pressed():
 	var it_collection = null
 	var is_iterating = false
 	var i = 0
+	var error = false
 	while i < textArray.size():
 		var words = textArray[i].split(" ")
+		if !available_commands.has(words[0]):
+			error()
+			i = textArray.size()
+			error = true
 		match words[0]:
 			"iterate":
 				if available_collections.has(words[1]):
@@ -73,6 +78,10 @@ func _on_Button_pressed():
 					is_iterating = true
 					
 					i += 1
+				else:
+					error()
+					i = textArray.size()
+					error = true
 			"next":
 				if is_iterating and loop_count < loop_times - 1:
 					i = loop_start_line
@@ -101,11 +110,18 @@ func _on_Button_pressed():
 								i += 2
 							else:
 								i += 3
+						_:
+							error()
 				else:
-					error(i)
+					error()
 					i = textArray.size()
+					error = true
 					
 			"shoot":
+				if (words[1] != "it"):
+					error()
+					i = textArray.size()
+					error = true
 				$Turret.set_frame(1)
 				var t = Timer.new()
 				t.set_wait_time(0.5)
@@ -123,24 +139,25 @@ func _on_Button_pressed():
 				yield(t, "timeout")
 				i += 1
 	
-	
-	var lost = false
-	
-	for duck in ducks:
-		if duck.is_dead:
-			lose_state()
-			lost = true
-			break
-	
-	if !lost:
-		for crocodile in crocodiles:
-			if !crocodile.is_dead:
+	if (!error):
+		
+		var lost = false
+		
+		for duck in ducks:
+			if duck.is_dead:
 				lose_state()
 				lost = true
 				break
-	
-	if !lost:
-		win_state()
+		
+		if !lost:
+			for crocodile in crocodiles:
+				if !crocodile.is_dead:
+					lose_state()
+					lost = true
+					break
+		
+		if !lost:
+			win_state()
 
 func lose_state():
 	$LoseScreen.visible = true
@@ -148,8 +165,8 @@ func lose_state():
 func win_state():
 	$WinScreen.visible = true
 
-func error(word):
-	print("ERR: " + str(word))
+func error():
+	$ErrorScreen.visible = true
 
 
 func _on_MenuButton_pressed():
@@ -166,3 +183,7 @@ func _on_StartButton_pressed():
 	t.start()
 	yield(t, "timeout")
 	$CrocodileDialog.visible = false
+
+
+func _on_ErrorButton_pressed():
+	$ErrorScreen.visible = false
