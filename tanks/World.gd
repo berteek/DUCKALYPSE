@@ -66,6 +66,7 @@ func _on_Button_pressed():
 			error()
 			i = textArray.size()
 			error = true
+			break
 		match words[0]:
 			"iterate":
 				if available_collections.has(words[1]):
@@ -82,6 +83,7 @@ func _on_Button_pressed():
 					error()
 					i = textArray.size()
 					error = true
+					break
 			"next":
 				if is_iterating and loop_count < loop_times - 1:
 					i = loop_start_line
@@ -112,16 +114,26 @@ func _on_Button_pressed():
 								i += 3
 						_:
 							error()
+							i = textArray.size()
+							error = true
+							break
 				else:
 					error()
 					i = textArray.size()
 					error = true
+					break
 					
 			"shoot":
-				if (words[1] != "it" and words.size() < 2):
+				if (words.size() < 2):
 					error()
 					i = textArray.size()
 					error = true
+					break
+				if (words[1] != "it"):
+					error()
+					i = textArray.size()
+					error = true
+					break
 				$Turret.set_frame(1)
 				var t = Timer.new()
 				t.set_wait_time(0.5)
