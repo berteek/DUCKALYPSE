@@ -1,0 +1,68 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Entity",
+"class": "Crocodile",
+"language": "GDScript",
+"path": "res://tanks/crocodiles/Crocodile.gd"
+}, {
+"base": "Entity",
+"class": "Duck",
+"language": "GDScript",
+"path": "res://tanks/ducks/Duck.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://tanks/Entity.gd"
+}, {
+"base": "",
+"class": "GitAPI",
+"language": "NativeScript",
+"path": "res://addons/godot-git-plugin/git_api.gdns"
+} ]
+_global_script_class_icons={
+"Crocodile": "",
+"Duck": "",
+"Entity": "",
+"GitAPI": ""
+}
+
+[application]
+
+config/name="Утиная Братва( Duckalypse)"
+run/main_scene="res://menu/Menu.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+GlobalVariables="*res://Boxes/Scenes/GlobalVariables.tscn"
+
+[display]
+
+window/size/width=640
+window/size/height=360
+window/size/test_width=1280
+window/size/test_height=800
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[gdnative]
+
+singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

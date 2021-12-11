@@ -1,0 +1,441 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://Boxes/Scripts/LabelDND.gd" type="Script" id=1]
+[ext_resource path="res://Boxes/Scripts/SelectGoodOrBad.gd" type="Script" id=2]
+[ext_resource path="res://Boxes/Sprites/sklad.png" type="Texture" id=3]
+[ext_resource path="res://Boxes/Sprites/boxes/box1.png" type="Texture" id=4]
+[ext_resource path="res://Boxes/Scripts/LabelElement.gd" type="Script" id=5]
+[ext_resource path="res://Boxes/Sprites/GoodOrBad3.png" type="Texture" id=6]
+[ext_resource path="res://Boxes/Sprites/GoodOrBad2.png" type="Texture" id=7]
+[ext_resource path="res://Boxes/Sprites/GoodOrBad1.png" type="Texture" id=8]
+[ext_resource path="res://SlimamifBold.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Boxes/Sprites/boxes/box2.png" type="Texture" id=10]
+[ext_resource path="res://Boxes/Sprites/boxes/box4.png" type="Texture" id=11]
+[ext_resource path="res://Boxes/Sprites/boxes/box5.png" type="Texture" id=12]
+[ext_resource path="res://Boxes/Scenes/GUI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Boxes/Scripts/GUI/TextureProgress.gd" type="Script" id=14]
+[ext_resource path="res://Boxes/Scripts/GUI/Attempts.gd" type="Script" id=15]
+[ext_resource path="res://Boxes/Scripts/MainScene.gd" type="Script" id=16]
+[ext_resource path="res://menu/new_theme.tres" type="Theme" id=17]
+[ext_resource path="res://Boxes/ducky/duck_talking1.png" type="Texture" id=18]
+[ext_resource path="res://Boxes/ducky/duck_talking2.png" type="Texture" id=19]
+[ext_resource path="res://Boxes/ducky/ducky2.png" type="Texture" id=20]
+[ext_resource path="res://Boxes/ducky/ducky3.png" type="Texture" id=21]
+[ext_resource path="res://Boxes/ducky/ducky1.png" type="Texture" id=22]
+[ext_resource path="res://Boxes/Scenes/Duck.gd" type="Script" id=23]
+[ext_resource path="res://Boxes/ducky/image (3).png" type="Texture" id=24]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 41, 127.75 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 19, 10 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 9 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 58, 103 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 61.5, 62 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 56, 95 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ ExtResource( 22 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 9 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 16 )
+
+[node name="Background" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 800.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Poster" type="Sprite" parent="."]
+position = Vector2( 515, 283 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 24 )
+
+[node name="intArea" type="Area2D" parent="."]
+position = Vector2( 200, 605 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="intArea"]
+position = Vector2( 0, 5.75 )
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="intArea/CollisionShape2D"]
+position = Vector2( 7, 2.25 )
+texture = ExtResource( 4 )
+
+[node name="GoodOrBad" type="Node2D" parent="."]
+position = Vector2( 640, 200 )
+
+[node name="Sprite" type="AnimatedSprite" parent="GoodOrBad"]
+frames = SubResource( 5 )
+script = ExtResource( 2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 640, 72 )
+scale = Vector2( 2, 2 )
+input_pickable = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 6 )
+
+[node name="Label" type="Label" parent="KinematicBody2D/CollisionShape2D"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -13.0
+margin_right = 71.0
+margin_bottom = 11.0
+custom_fonts/font = SubResource( 7 )
+text = "крокодилы"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="floatArea" type="Area2D" parent="."]
+position = Vector2( 338, 716 )
+
+[node name="Shape" type="CollisionShape2D" parent="floatArea"]
+position = Vector2( 28, -77 )
+shape = SubResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="floatArea/Shape"]
+position = Vector2( 5, 2 )
+texture = ExtResource( 10 )
+
+[node name="boolArea" type="Area2D" parent="."]
+position = Vector2( 532, 719 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boolArea"]
+position = Vector2( 29.5, -46 )
+shape = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="boolArea/CollisionShape2D"]
+position = Vector2( -4, -1 )
+texture = ExtResource( 11 )
+
+[node name="stringArea" type="Area2D" parent="."]
+position = Vector2( 700, 723 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stringArea"]
+position = Vector2( 46, -79 )
+shape = SubResource( 10 )
+
+[node name="Sprite" type="Sprite" parent="stringArea/CollisionShape2D"]
+position = Vector2( -2, 3 )
+texture = ExtResource( 12 )
+
+[node name="Node2D" parent="." instance=ExtResource( 13 )]
+
+[node name="TextureProgress" parent="Node2D/HBoxContainer/Timeline" index="0"]
+script = ExtResource( 14 )
+
+[node name="Label" parent="Node2D/HBoxContainer/VBoxContainer" index="0"]
+script = ExtResource( 15 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="Duck" type="AnimatedSprite" parent="."]
+position = Vector2( 924, 507 )
+rotation = 3.14159
+scale = Vector2( 0.52, -0.52 )
+frames = SubResource( 12 )
+script = ExtResource( 23 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 288.0
+margin_top = 127.0
+margin_right = 979.0
+margin_bottom = 597.0
+color = Color( 0.917647, 0.635294, 0.192157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 681.0
+margin_bottom = 458.0
+color = Color( 0.054902, 0.141176, 0.0666667, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+margin_left = 79.0
+margin_top = 170.0
+margin_right = 621.0
+margin_bottom = 394.0
+color = Color( 0.466667, 0.364706, 0.207843, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ColorRect/ColorRect"]
+margin_left = 10.0
+margin_top = 6.0
+margin_right = 539.0
+margin_bottom = 219.0
+theme = ExtResource( 17 )
+custom_fonts/font = SubResource( 13 )
+text = "Война...Война никогда не меняется... Эти крокодилы наступают нам на лапы! Утки должны собраться и начать свое наступление! Тебе, рядовой Утяткин, следует распололжить данные в коробки. У каждого значения этих данных есть только ОДИН свой тип данных. Программа подскажет тебе правильно ты положил или нет: для этого тебе нужно смотреть почти под потолок. У тебя ограничено время и всего 3 попытки. У нас отличная защита от этих глупых крокодилов, и если ты допустишь 3 ошибешки, то канал перекроется и данные не отправятся. ВО БЛАГО УТИНОГО НАРОДАААА!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="ColorRect"]
+margin_left = 289.0
+margin_top = 407.0
+margin_right = 414.0
+margin_bottom = 437.0
+theme = ExtResource( 17 )
+text = "Начать"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+margin_left = 294.0
+margin_top = 58.0
+margin_right = 412.0
+margin_bottom = 157.0
+color = Color( 0.427451, 0.352941, 0.133333, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+margin_left = 310.0
+margin_top = 68.0
+margin_right = 393.0
+margin_bottom = 151.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ColorRect"]
+position = Vector2( 350, 108 )
+frames = SubResource( 11 )
+frame = 1
+playing = true
+
+[node name="LoseScreen" type="ColorRect" parent="."]
+visible = false
+margin_left = 288.0
+margin_top = 127.0
+margin_right = 979.0
+margin_bottom = 597.0
+color = Color( 0.917647, 0.635294, 0.192157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="LoseScreen"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 681.0
+margin_bottom = 458.0
+color = Color( 0.054902, 0.141176, 0.0666667, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="LoseScreen"]
+margin_left = 79.0
+margin_top = 219.0
+margin_right = 621.0
+margin_bottom = 369.0
+color = Color( 0.466667, 0.364706, 0.207843, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="LoseScreen/ColorRect"]
+margin_left = 31.0
+margin_top = 30.0
+margin_right = 560.0
+margin_bottom = 156.0
+rect_scale = Vector2( 3, 3 )
+theme = ExtResource( 17 )
+text = "ОШИБКА РЯДОВОЙ!!!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="LoseScreen"]
+margin_left = 355.0
+margin_top = 395.0
+margin_right = 480.0
+margin_bottom = 425.0
+theme = ExtResource( 17 )
+text = "Повторить"
+
+[node name="Button2" type="Button" parent="LoseScreen"]
+margin_left = 217.0
+margin_top = 395.0
+margin_right = 342.0
+margin_bottom = 425.0
+theme = ExtResource( 17 )
+text = "Меню"
+
+[node name="ColorRect2" type="ColorRect" parent="LoseScreen"]
+margin_left = 294.0
+margin_top = 108.0
+margin_right = 412.0
+margin_bottom = 207.0
+color = Color( 0.427451, 0.352941, 0.133333, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="LoseScreen"]
+margin_left = 310.0
+margin_top = 126.0
+margin_right = 393.0
+margin_bottom = 209.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="LoseScreen"]
+position = Vector2( 348, 157 )
+frames = SubResource( 11 )
+playing = true
+
+[node name="WinScreen" type="ColorRect" parent="."]
+visible = false
+margin_left = 288.0
+margin_top = 127.0
+margin_right = 979.0
+margin_bottom = 597.0
+color = Color( 0.917647, 0.635294, 0.192157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="WinScreen"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 681.0
+margin_bottom = 458.0
+color = Color( 0.054902, 0.141176, 0.0666667, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="WinScreen"]
+margin_left = 122.0
+margin_top = 252.0
+margin_right = 585.0
+margin_bottom = 338.0
+color = Color( 0.466667, 0.364706, 0.207843, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WinScreen/ColorRect"]
+margin_left = 43.0
+margin_top = 19.0
+margin_right = 298.0
+margin_bottom = 55.0
+rect_scale = Vector2( 1.5, 1.5 )
+theme = ExtResource( 17 )
+text = "Молодец, Рядовой. Так держать."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="WinScreen"]
+margin_left = 355.0
+margin_top = 395.0
+margin_right = 480.0
+margin_bottom = 425.0
+theme = ExtResource( 17 )
+text = "Повторить"
+
+[node name="Button2" type="Button" parent="WinScreen"]
+margin_left = 217.0
+margin_top = 395.0
+margin_right = 342.0
+margin_bottom = 425.0
+theme = ExtResource( 17 )
+text = "Меню"
+
+[node name="ColorRect2" type="ColorRect" parent="WinScreen"]
+margin_left = 294.0
+margin_top = 108.0
+margin_right = 412.0
+margin_bottom = 207.0
+color = Color( 0.427451, 0.352941, 0.133333, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="WinScreen"]
+margin_left = 310.0
+margin_top = 126.0
+margin_right = 393.0
+margin_bottom = 209.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="WinScreen"]
+position = Vector2( 348, 157 )
+frames = SubResource( 11 )
+playing = true
+
+[connection signal="body_entered" from="intArea" to="KinematicBody2D" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="floatArea" to="KinematicBody2D" method="_on_floatArea_body_entered"]
+[connection signal="body_entered" from="boolArea" to="KinematicBody2D" method="_on_boolArea_body_entered"]
+[connection signal="body_entered" from="stringArea" to="KinematicBody2D" method="_on_stringArea_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="LoseScreen/Button" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="LoseScreen/Button2" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="WinScreen/Button" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="WinScreen/Button2" to="." method="_on_MenuButton_pressed"]
+
+[editable path="Node2D"]
